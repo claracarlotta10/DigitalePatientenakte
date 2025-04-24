@@ -4,45 +4,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Arzt {
+
+	// Instanzvariablen
+	private String vorname;
+	private String nachname;
+	private Fachrichtungen fachrichtung;
 	
-	private String vorname; 
-	private String nachname; 
-	private String fachgebiet;
-	
-	public Arzt(String vorname, String nachname, String fachgebiet){
+	// Konstruktor
+	public Arzt(String vorname, String nachname, Fachrichtungen fachrichtung) {
 		this.vorname = vorname;
 		this.nachname = nachname;
-		this.fachgebiet = fachgebiet;
+		this.fachrichtung = fachrichtung;
 	}
-	
-	public Arzt arztAnlegen2(Scanner scanner) {
-		String inputVorname = scanner.nextLine();
-		System.out.println("Vorname:");
 
-		String inputNachname = scanner.nextLine();
-		System.out.println("Nachname:");
+	public Arzt() {
+		// TODO Auto-generated constructor stub
+	}
 
-		String inputFAchrichtung = scanner.nextLine();
-		System.out.println("Fachrichtung");
-		Arzt neuerArzt = new Arzt(inputVorname, inputNachname, inputFAchrichtung);
-		return neuerArzt;
-	}
-	
-	public void arztInfosAusgeben2(List<Arzt> ärzte) {
-		if (ärzte.isEmpty()) {
-			System.out.println("Es wurden noch keine Ärzte erfasst.");
-		}
-		for (Arzt arzt : ärzte) {
-			// TODO nachfragen, ob hier etwas ausgegeben werden soll
-			// System.out.println("Arzt nr ");
-			System.out.println(arzt.getVorname());
-			System.out.println(arzt.getNachname());
-			System.out.println(arzt.getFachgebiet());
-		}
-	}
-	
-	
-	
+	// Getter und setter
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
 	}
@@ -55,17 +34,16 @@ public class Arzt {
 		this.nachname = nachname;
 	}
 
-	public String getFachgebiet() {
-		return fachgebiet;
+	public Fachrichtungen getFachrichtung() {
+		return this.fachrichtung;
 	}
 
-	public void setFachgebiet(String fachgebiet) {
-		this.fachgebiet = fachgebiet;
+	public void setFachrichtung(Fachrichtungen fachrichtung) {
+		this.fachrichtung = fachrichtung;
 	}
 
 	public String getVorname() {
 		return vorname;
 	}
-	
 
 }
