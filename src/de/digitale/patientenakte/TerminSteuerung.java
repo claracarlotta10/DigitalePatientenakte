@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class TerminSteuerung {
 
-	//legt auf basis von nutzereingabe einen termin an
+	// legt auf basis von nutzereingabe einen termin an
 	public static Termin terminAnlegen(Scanner scanner, List<Arzt> aerzte) {
 
 		// Dem Nutzer die Ärtze aufzeigen mit Hilfe der Methode arztInfosAusgeben
@@ -15,16 +15,19 @@ public class TerminSteuerung {
 		// Nutzerinput einlesen für Arztname und Datum
 		System.out.println("Nachname des Arztes, bei dem ein Termin angelegt werden soll:");
 		String inputBehandelnderArzt = scanner.nextLine();
-		Arzt behandelnderArzt = new Arzt();
+		Arzt behandelnderArzt = null;
 
 		// Arzt in Liste von aertzen finden
-		for (Arzt a : aerzte) {
-			if (a.getNachname().equalsIgnoreCase(inputBehandelnderArzt)) {
-				behandelnderArzt = a;
+		for (Arzt arzt : aerzte) {
+			if (arzt.getNachname().equalsIgnoreCase(inputBehandelnderArzt)) {
+				behandelnderArzt = arzt;
 				break;
-			} else {
-				System.out.println("Dieser Arzt wurde nicht erfasst, deshlab kann bei ihm kein Termin angelegt werden");
 			}
+		}
+		// Abbruch, weil kein Termin erstellt wird
+		if (behandelnderArzt == null) {
+			System.out.println("Dieser Arzt wurde nicht erfasst, deshalb kann bei ihm kein Termin angelegt werden");
+			return null;
 		}
 
 		System.out.println("Datum des Termins im Format dd.mm.yyyy:");
@@ -44,14 +47,15 @@ public class TerminSteuerung {
 			System.out.println("Es wurden noch keine Termine erfasst.");
 		}
 		for (Termin termin : termine) {
-			System.out.println("BehandelnderArzt: " + termin.getBehandelnderArztName());
+			System.out.println("BehandelnderArzt: " + termin.getBehandelnderArzt().getNachname());
 			System.out.println("Datum: " + termin.getDatum());
 			System.out.println("Termin ID: " + termin.getId());
 			System.out.println("-----------");
 		}
 	}
 
-	//löscht einen termin aus einer liste von terminen anhand der Nutzereingabe der termin-ID
+	// löscht einen termin aus einer liste von terminen anhand der Nutzereingabe der
+	// termin-ID
 	public static void terminLoeschen(Scanner scanner, List<Termin> termine) {
 
 		// Termin-ID erfassen

@@ -1,13 +1,13 @@
 package de.digitale.patientenakte;
 
 public class Termin {
-	
+
 	private Arzt behandelnderArzt;
 	private String datum;
 	private int id;
-	
+
 	static int idCounter = 0;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -19,16 +19,15 @@ public class Termin {
 	public Arzt getBehandelnderArzt() {
 		return behandelnderArzt;
 	}
-	
-	public String getBehandelnderArztName() {
-		return behandelnderArzt.getNachname();
-	}
+
 	public void setBehandelnderArzt(Arzt behandelnderArzt) {
 		this.behandelnderArzt = behandelnderArzt;
 	}
+
 	public String getDatum() {
 		return datum;
 	}
+
 	public void setDatum(String datum) {
 		this.datum = datum;
 	}
@@ -40,8 +39,8 @@ public class Termin {
 	}
 
 	public Termin() {
+		this.id = ++idCounter;
 		// TODO Auto-generated constructor stub
-	} 
-	
+	}
 
 }

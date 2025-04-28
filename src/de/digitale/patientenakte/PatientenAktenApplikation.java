@@ -15,8 +15,6 @@ public class PatientenAktenApplikation {
 
 		Scanner scanner = new Scanner(System.in);
 		boolean programmBeenden = false; // zur Nutzung als Abbruchbedingung in der while Schleife
-		// boolean arztVollständig = false; // Zur Nutzung abbruchbedingung while
-		// Schelife in Case 1
 
 		// Dialog-Logik
 		System.out
@@ -31,7 +29,8 @@ public class PatientenAktenApplikation {
 			System.out.println("Option 3: 'Termin anlegen'");
 			System.out.println("Option 4: 'Termine anzeigen'");
 			System.out.println("Option 5: 'Termin löschen'.");
-			System.out.println("Option 6: 'Programm beenden'.");
+			System.out.println("Option 6: 'Arzt löschen'.");
+			System.out.println("Option 7: 'Programm beenden'.");
 			System.out.println("Gib 1, 2, 3, 4, 5,6 oder 7 ein:");
 
 			// Eingabe des Nutzers
@@ -46,7 +45,7 @@ public class PatientenAktenApplikation {
 									// (Irgendwas mit Puffer leeren)
 			}
 
-			// Switch Case auf Basis von Nutzeriengabe (inputZahl). bei default erneut
+			// Switch Case auf Basis von Nutzereingabe (inputZahl). bei default erneut
 			// aufrufen
 			switch (inputZahl) {
 			case 1:
@@ -55,8 +54,9 @@ public class PatientenAktenApplikation {
 				Arzt neuerArzt = ArztSteuerung.arztAnlegen(scanner);
 
 				// zu Liste ärzte den neuen Arzt hinzufügen
-				// TODO evtl hier abfragen ob neuerArzt != null?
-				aerzte.add(neuerArzt);
+				if (neuerArzt != null) {
+					aerzte.add(neuerArzt);
+				}
 
 				break;
 			case 2:
@@ -73,11 +73,16 @@ public class PatientenAktenApplikation {
 				// Terminklasse anlegen mit notwendigen Attributen
 				// am Ende soll neue Termininstanz returned werden?
 				Termin neuerTermin = TerminSteuerung.terminAnlegen(scanner, aerzte);
-				termine.add(neuerTermin);
+				if (neuerTermin != null) {
+					termine.add(neuerTermin);
+				} else {
+					System.out.println("Es wurde kein neuer Termin angelegt.");
+				}
+
 				break;
 			case 4:
 				System.out.println("Hier ist eine Übersicht aller erfassten Termine:");
-				// Aufruf der Hilfsmethode arztInfosAusgeben mit der termine
+				// Aufruf der Hilfsmethode arztInfosAusgeben mit der termine liste
 				TerminSteuerung.terminInfosAusgeben(termine);
 				break;
 			case 5:
@@ -85,7 +90,7 @@ public class PatientenAktenApplikation {
 				System.out.println("Termin wurde gelöscht.");
 				break;
 			case 6:
-				ArztSteuerung.arztLoeschen(scanner, aerzte);
+				ArztSteuerung.arztLoeschen(scanner, aerzte, termine);
 				break;
 			case 7:
 				System.out.println("Programm wurde beendet.");
